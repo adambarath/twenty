@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 
 import { useAuth } from '@/auth/hooks/useAuth';
@@ -23,6 +24,7 @@ import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
 
 export const SettingsNavigationDrawerItems = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const { signOut } = useAuth();
 
   const handleLogout = useCallback(() => {
@@ -45,7 +47,7 @@ export const SettingsNavigationDrawerItems = () => {
       <NavigationDrawerSection>
         <NavigationDrawerSectionTitle label="User" />
         <NavigationDrawerItem
-          label="Profile"
+          label={t('settings.profile')}
           to="/settings/profile"
           Icon={IconUserCircle}
           active={

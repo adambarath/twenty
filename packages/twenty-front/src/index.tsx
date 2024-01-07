@@ -24,6 +24,7 @@ import { App } from '~/App';
 import { PageChangeEffect } from '~/effect-components/PageChangeEffect';
 
 import '@emotion/react';
+import './utils/translation-utils'; // import i18n (needs to be bundled ;))
 
 import './index.css';
 import 'react-loading-skeleton/dist/skeleton.css';
