@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { DropdownMenu } from '@/ui/layout/dropdown/components/DropdownMenu';
@@ -37,7 +38,7 @@ export const CountryPickerDropdownSelect = ({
   onChange: (countryCode: string) => void;
 }) => {
   const [searchFilter, setSearchFilter] = useState<string>('');
-
+  const { t } = useTranslation();
   const filteredCountries = useMemo(
     () =>
       countries.filter(({ countryName }) =>
@@ -58,7 +59,7 @@ export const CountryPickerDropdownSelect = ({
       <DropdownMenuSeparator />
       <DropdownMenuItemsContainer hasMaxHeight>
         {filteredCountries?.length === 0 ? (
-          <MenuItem text="No result" />
+          <MenuItem text={t('ui.input.countrypicker.noresult')} />
         ) : (
           <>
             {selectedCountry && (

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { HotkeysEvent } from 'react-hotkeys-hook/dist/types';
+import { useTranslation } from 'react-i18next';
 import TextareaAutosize from 'react-textarea-autosize';
 import styled from '@emotion/styled';
 
@@ -120,6 +121,7 @@ export const AutosizeTextInput = ({
   value = '',
   className,
 }: AutosizeTextInputProps) => {
+  const { t } = useTranslation();
   const [isFocused, setIsFocused] = useState(false);
   const [isHidden, setIsHidden] = useState(
     variant === AutosizeTextInputVariant.Button,
@@ -190,7 +192,9 @@ export const AutosizeTextInput = ({
           {!isHidden && (
             <StyledTextArea
               autoFocus={variant === AutosizeTextInputVariant.Button}
-              placeholder={placeholder ?? 'Write a comment'}
+              placeholder={
+                placeholder ?? t('ui.input.autosizeTextInput.placeholder')
+              }
               maxRows={MAX_ROWS}
               minRows={computedMinRows}
               onChange={handleInputChange}
@@ -231,7 +235,7 @@ export const AutosizeTextInput = ({
               )}
             </StyledWordCounter>
             <StyledSendButton
-              title={buttonTitle ?? 'Comment'}
+              title={buttonTitle ?? t('ui.input.autosizeTextInput.comment')}
               disabled={isSendButtonDisabled}
               onClick={handleOnClickSendButton}
             />

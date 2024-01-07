@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { MatchColumnSelect } from '@/spreadsheet-import/components/MatchColumnSelect';
@@ -35,6 +36,7 @@ export const SubMatchingSelect = <T extends string>({
   column,
   onSubChange,
 }: SubMatchingSelectProps<T>) => {
+  const { t } = useTranslation();
   const { fields } = useSpreadsheetImportInternal<T>();
   const options = getFieldOptions(fields, column.value) as SelectOption[];
   const value = options.find((opt) => opt.value === option.value);
@@ -44,7 +46,9 @@ export const SubMatchingSelect = <T extends string>({
       <StyledSelectLabel>{option.entry}</StyledSelectLabel>
       <MatchColumnSelect
         value={value}
-        placeholder="Select..."
+        placeholder={t(
+          'modules.spreadsheetimport.matchColumnsStep.selectPlaceholder',
+        )}
         onChange={(value) =>
           onSubChange(value?.value as T, column.index, option.entry ?? '')
         }

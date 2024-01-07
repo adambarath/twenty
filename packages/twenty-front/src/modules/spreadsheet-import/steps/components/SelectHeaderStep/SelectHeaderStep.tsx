@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { ContinueButton } from '@/spreadsheet-import/components/ContinueButton';
@@ -30,6 +31,7 @@ export const SelectHeaderStep = ({
   const [selectedRows, setSelectedRows] = useState<ReadonlySet<number>>(
     new Set([0]),
   );
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleContinue = useCallback(async () => {
@@ -44,7 +46,9 @@ export const SelectHeaderStep = ({
   return (
     <>
       <Modal.Content>
-        <StyledHeading title="Select header row" />
+        <StyledHeading
+          title={t('modules.spreadsheetimport.selectHeaderStep.select')}
+        />
         <StyledTableContainer>
           <SelectHeaderTable
             data={data}
@@ -55,7 +59,7 @@ export const SelectHeaderStep = ({
       </Modal.Content>
       <ContinueButton
         onContinue={handleContinue}
-        title="Next"
+        title={t('modules.spreadsheetimport.selectHeaderStep.next')}
         isLoading={isLoading}
       />
     </>

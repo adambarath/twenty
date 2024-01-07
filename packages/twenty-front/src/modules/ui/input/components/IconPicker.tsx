@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
 
@@ -88,6 +89,7 @@ export const IconPicker = ({
   variant = 'secondary',
   className,
 }: IconPickerProps) => {
+  const { t } = useTranslation();
   const [searchString, setSearchString] = useState('');
   const {
     goBackToPreviousHotkeyScope,
@@ -149,7 +151,7 @@ export const IconPicker = ({
           >
             <DropdownMenu width={176}>
               <DropdownMenuSearchInput
-                placeholder="Search icon"
+                placeholder={t('ui.input.iconPicker.search')}
                 autoFocus
                 onChange={(event) => setSearchString(event.target.value)}
               />

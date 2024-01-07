@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useRecoilValue } from 'recoil';
@@ -25,6 +26,7 @@ export const ShowPageMoreButton = ({
   recordId: string;
   objectNameSingular: string;
 }) => {
+  const { t } = useTranslation();
   const { closeDropdown, toggleDropdown } = useDropdown('more-show-page');
   const navigationMemorizedUrl = useRecoilValue(navigationMemorizedUrlState);
   const navigate = useNavigate();
@@ -60,7 +62,7 @@ export const ShowPageMoreButton = ({
                 onClick={handleDelete}
                 accent="danger"
                 LeftIcon={IconTrash}
-                text="Delete"
+                text={t('ui.layout.showpage.delete')}
               />
             </DropdownMenuItemsContainer>
           </DropdownMenu>

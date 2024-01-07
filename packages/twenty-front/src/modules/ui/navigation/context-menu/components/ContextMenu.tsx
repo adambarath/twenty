@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -42,6 +43,7 @@ const StyledContainerContextMenu = styled.div<StyledContainerProps>`
 `;
 
 export const ContextMenu = ({ selectedIds }: ContextMenuProps) => {
+  const { t } = useTranslation();
   const contextMenuPosition = useRecoilValue(contextMenuPositionState);
   const contextMenuIsOpen = useRecoilValue(contextMenuIsOpenState);
   const contextMenuEntries = useRecoilValue(contextMenuEntriesState);
@@ -62,7 +64,8 @@ export const ContextMenu = ({ selectedIds }: ContextMenuProps) => {
   }
 
   const width = contextMenuEntries.some(
-    (contextMenuEntry) => contextMenuEntry.label === 'Remove from favorites',
+    (contextMenuEntry) =>
+      contextMenuEntry.label === t('ui.navigation.contextmenu.remove'),
   )
     ? 200
     : undefined;

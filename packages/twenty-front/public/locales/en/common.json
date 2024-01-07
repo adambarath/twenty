@@ -1,5 +1,133 @@
 {
   "settings": {
     "profile": "Profile"
+  },
+  "ui": {
+    "input": {
+      "imageInput": {
+        "abort": "Abort",
+        "upload": "Upload",
+        "remove": "Remove",
+        "supportedFiles": "We support your best PNGs, JPEGs and GIFs portraits under 10MB"
+      },
+      "autosizeTextInput": {
+        "placeholder": "Write a comment",
+        "comment": "Comment"
+      },
+      "countrypicker": {
+        "noresult": "No result"
+      },
+
+      "iconPicker": {
+        "search": "Search icon"
+      },
+      "phoneInput": {
+        "placeholder": "Phone number"
+      }
+    },
+    "layout": {
+      "selectableList": {
+        "error": "Either selectableItemIdArray or selectableItemIdsMatrix must be provided"
+      },
+      "dropdown": {
+        "search": "Search"
+      },
+      "modal": {
+        "delete": "Delete"
+      },
+      "showpage": {
+        "delete": "Delete"
+      }
+    },
+    "navigation": {
+      "contextmenu": {
+        "remove": "Remove from favorites"
+      }
+    }
+  },
+  "workspace": {
+    "workspaceInviteLink": {
+      "copy": "Copy link",
+      "copied": "Link copied to clipboard"
+    }
+  },
+  "views": {
+    "viewsDropdownButton": {
+      "addviews": "Add view",
+      "all": "All"
+    }
+  },
+  "modules": {
+    "settings": {
+      "accounts": {
+        "connectedAccount": {
+          "title": "Connected accounts",
+          "subtitle": "Manage your internet accounts."
+        }
+      }
+    },
+    "utils": {
+      "dataMutations": {
+        "mustbeunique": "Field must be unique",
+        "required": "Field is required",
+        "regex": "Field did not match the regex /{{value}}/{{flags}}",
+        "invalid": "Field is invalid"
+      }
+    },
+    "spreadsheetimport": {
+      "steps": {
+        "uploadStep": "Upload file",
+        "matchColumnsStep": "Match columns",
+        "validationStep": "Validate data"
+      },
+      "uploadFlow": {
+        "error": "Error",
+        "toomany": "Too many records. Up to {{maxRecords}} allowed"
+      },
+      "validationStep": {
+        "finishwitherrorsTitle": "Finish flow with errors",
+        "finishwitherrorsMessage": "There are still some rows that contain errors. Rows with errors will be ignored when submitting.",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "review": "Review your import",
+        "reviewDescription": "Correct the issues and fill the missing data.",
+        "remove": "Remove",
+        "nodataerror": "No data containing errors",
+        "nodata": "No data found",
+        "confirm": "Confirm"
+      },
+      "uploadStep": {
+        "select": "Select file"
+      },
+      "selectSheetStep": {
+        "select": "Select the sheet to use",
+        "next": "Next"
+      },
+      "selectHeaderStep": {
+        "select": "Select header row",
+        "next": "Next",
+        "selectColumn": "Select"
+      },
+      "matchColumnsStep": {
+        "cannotduplicate": "Columns cannot duplicate",
+        "columnunselected": "Another column unselected",
+        "notallmatched": "Not all columns matched",
+        "notallmatchedMessage": "There are required columns that are not matched or ignored. Do you want to continue?",
+        "continue": "Continue",
+        "cancel": "Cancel",
+        "next": "Next",
+        "matchcolumns": "Match Columns",
+        "matchcolumnsDescription": "Select the correct field for each column you'd like to import.",
+        "selectPlaceholder": "Select..."
+      },
+      "components": {
+        "exitDialogTitle": "Exit import flow",
+        "exitDialogMessage": "Are you sure? Your current information will not be saved.",
+        "Cancel": "Cancel",
+        "Exit": "Exit",
+        "alreadyimporting": "You are already importing this column.",
+        "noresult": "No result"
+      }
+    }
   }
 }

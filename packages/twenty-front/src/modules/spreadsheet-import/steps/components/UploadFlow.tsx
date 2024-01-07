@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { WorkBook } from 'xlsx-ugnis';
@@ -61,6 +62,7 @@ interface UploadFlowProps {
 }
 
 export const UploadFlow = ({ nextStep }: UploadFlowProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const { initialStepState } = useSpreadsheetImportInternal();
   const [state, setState] = useState<StepState>(
@@ -79,11 +81,11 @@ export const UploadFlow = ({ nextStep }: UploadFlowProps) => {
   const errorToast = useCallback(
     (description: string) => {
       enqueueSnackBar(description, {
-        title: 'Error',
+        title: t('modules.spreadsheetimport.uploadFlow.error'),
         variant: 'error',
       });
     },
-    [enqueueSnackBar],
+    [enqueueSnackBar, t],
   );
 
   switch (state.type) {
@@ -102,7 +104,9 @@ export const UploadFlow = ({ nextStep }: UploadFlowProps) => {
                 )
               ) {
                 errorToast(
-                  `Too many records. Up to ${maxRecords.toString()} allowed`,
+                  t('modules.spreadsheetimport.uploadFlow.toomany', {
+                    maxRecords: maxRecords.toString(),
+                  }),
                 );
                 return;
               }
@@ -151,7 +155,9 @@ export const UploadFlow = ({ nextStep }: UploadFlowProps) => {
               exceedsMaxRecords(state.workbook.Sheets[sheetName], maxRecords)
             ) {
               errorToast(
-                `Too many records. Up to ${maxRecords.toString()} allowed`,
+                t('modules.spreadsheetimport.uploadFlow.toomany', {
+                  maxRecords: maxRecords.toString(),
+                }),
               );
               return;
             }

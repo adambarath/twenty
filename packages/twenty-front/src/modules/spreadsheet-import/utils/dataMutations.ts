@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { v4 } from 'uuid';
 
 import {
@@ -65,7 +66,9 @@ export const addErrorsAndRunHooks = <T extends string>(
                 ...errors[index],
                 [field.key]: {
                   level: validation.level || 'error',
-                  message: validation.errorMessage || 'Field must be unique',
+                  message:
+                    validation.errorMessage ||
+                    t('modules.utils.dataMutations.mustbeunique'),
                 },
               };
             }
@@ -83,7 +86,9 @@ export const addErrorsAndRunHooks = <T extends string>(
                 ...errors[index],
                 [field.key]: {
                   level: validation.level || 'error',
-                  message: validation.errorMessage || 'Field is required',
+                  message:
+                    validation.errorMessage ||
+                    t('modules.utils.dataMutations.required'),
                 },
               };
             }
@@ -102,7 +107,10 @@ export const addErrorsAndRunHooks = <T extends string>(
                   level: validation.level || 'error',
                   message:
                     validation.errorMessage ||
-                    `Field did not match the regex /${validation.value}/${validation.flags} `,
+                    t('modules.utils.dataMutations.regex', {
+                      value: validation.value,
+                      flags: validation.flags,
+                    }),
                 },
               };
             }
@@ -118,7 +126,9 @@ export const addErrorsAndRunHooks = <T extends string>(
                 ...errors[index],
                 [field.key]: {
                   level: validation.level || 'error',
-                  message: validation.errorMessage || 'Field is invalid',
+                  message:
+                    validation.errorMessage ||
+                    t('modules.utils.dataMutations.invalid'),
                 },
               };
             }

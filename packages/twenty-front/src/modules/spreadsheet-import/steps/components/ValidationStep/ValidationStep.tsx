@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 // @ts-expect-error Todo: remove usage of react-data-grid
 import { RowsChangeData } from 'react-data-grid';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { ContinueButton } from '@/spreadsheet-import/components/ContinueButton';
@@ -70,6 +71,7 @@ export const ValidationStep = <T extends string>({
   file,
   onSubmitStart,
 }: ValidationStepProps<T>) => {
+  const { t } = useTranslation();
   const { enqueueDialog } = useDialogManager();
   const { fields, onClose, onSubmit, rowHook, tableHook } =
     useSpreadsheetImportInternal<T>();
@@ -176,13 +178,16 @@ export const ValidationStep = <T extends string>({
       submitData();
     } else {
       enqueueDialog({
-        title: 'Finish flow with errors',
-        message:
-          'There are still some rows that contain errors. Rows with errors will be ignored when submitting.',
+        title: t(
+          'modules.spreadsheetimport.validationStep.finishwitherrorsTitle',
+        ),
+        message: t(
+          'modules.spreadsheetimport.validationStep.finishwitherrorsMessage',
+        ),
         buttons: [
-          { title: 'Cancel' },
+          { title: t('modules.spreadsheetimport.validationStep.cancel') },
           {
-            title: 'Submit',
+            title: t('modules.spreadsheetimport.validationStep.submit'),
             variant: 'primary',
             onClick: submitData,
             role: 'confirm',
@@ -196,8 +201,10 @@ export const ValidationStep = <T extends string>({
     <>
       <StyledContent>
         <Heading
-          title="Review your import"
-          description="Correct the issues and fill the missing data."
+          title={t('modules.spreadsheetimport.validationStep.review')}
+          description={t(
+            'modules.spreadsheetimport.validationStep.reviewDescription',
+          )}
         />
         <StyledToolbar>
           <StyledErrorToggle>
@@ -211,7 +218,7 @@ export const ValidationStep = <T extends string>({
           </StyledErrorToggle>
           <Button
             Icon={IconTrash}
-            title="Remove"
+            title={t('modules.spreadsheetimport.validationStep.remove')}
             accent="danger"
             onClick={deleteSelectedRows}
             disabled={selectedRows.size === 0}
@@ -229,15 +236,18 @@ export const ValidationStep = <T extends string>({
               noRowsFallback: (
                 <StyledNoRowsContainer>
                   {filterByErrors
-                    ? 'No data containing errors'
-                    : 'No data found'}
+                    ? t('modules.spreadsheetimport.validationStep.nodataerror')
+                    : t('modules.spreadsheetimport.validationStep.nodata')}
                 </StyledNoRowsContainer>
               ),
             }}
           />
         </StyledScrollContainer>
       </StyledContent>
-      <ContinueButton onContinue={onContinue} title="Confirm" />
+      <ContinueButton
+        onContinue={onContinue}
+        title={t('modules.spreadsheetimport.validationStep.confirm')}
+      />
     </>
   );
 };

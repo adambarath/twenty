@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
@@ -41,6 +42,7 @@ export const MatchColumnSelect = ({
   options: initialOptions,
   placeholder,
 }: MatchColumnSelectProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const dropdownContainerRef = useRef<HTMLDivElement>(null);
@@ -146,7 +148,9 @@ export const MatchColumnSelect = ({
                         <AppTooltip
                           key={option.value}
                           anchorSelect={`#${option.value}`}
-                          content="You are already importing this column."
+                          content={t(
+                            'modules.spreadsheetimport.components.alreadyimporting',
+                          )}
                           place="right"
                           offset={-20}
                         />,
@@ -154,7 +158,11 @@ export const MatchColumnSelect = ({
                       )}
                   </>
                 ))}
-                {options?.length === 0 && <MenuItem text="No result" />}
+                {options?.length === 0 && (
+                  <MenuItem
+                    text={t('modules.spreadsheetimport.components.noresult')}
+                  />
+                )}
               </DropdownMenuItemsContainer>
             </DropdownMenu>
           </StyledFloatingDropdown>,

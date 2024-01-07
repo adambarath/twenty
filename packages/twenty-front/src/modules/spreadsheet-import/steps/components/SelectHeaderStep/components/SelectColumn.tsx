@@ -1,5 +1,6 @@
 // @ts-expect-error // Todo: remove usage of react-data-grid
 import { Column, FormatterProps, useRowSelection } from 'react-data-grid';
+import { useTranslation } from 'react-i18next';
 
 import { RawData } from '@/spreadsheet-import/types';
 import { Radio } from '@/ui/input/components/Radio';
@@ -9,11 +10,12 @@ const SELECT_COLUMN_KEY = 'select-row';
 type SelectFormatterProps = FormatterProps<unknown>;
 
 const SelectFormatter = (props: SelectFormatterProps) => {
+  const { t } = useTranslation();
   const [isRowSelected, onRowSelectionChange] = useRowSelection();
 
   return (
     <Radio
-      aria-label="Select"
+      aria-label={t('modules.spreadsheetimport.selectHeaderStep.selectColumn')}
       checked={isRowSelected}
       onChange={(event) => {
         onRowSelectionChange({

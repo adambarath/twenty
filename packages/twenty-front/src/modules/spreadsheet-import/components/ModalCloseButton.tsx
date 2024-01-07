@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { useSpreadsheetImportInitialStep } from '@/spreadsheet-import/hooks/useSpreadsheetImportInitialStep';
@@ -23,6 +24,7 @@ type ModalCloseButtonProps = {
 };
 
 export const ModalCloseButton = ({ onClose }: ModalCloseButtonProps) => {
+  const { t } = useTranslation();
   const { initialStepState } = useSpreadsheetImportInternal();
 
   const { initialStep } = useSpreadsheetImportInitialStep(
@@ -41,11 +43,16 @@ export const ModalCloseButton = ({ onClose }: ModalCloseButtonProps) => {
       return;
     }
     enqueueDialog({
-      title: 'Exit import flow',
-      message: 'Are you sure? Your current information will not be saved.',
+      title: t('modules.spreadsheetimport.components.exitDialogTitle'),
+      message: t('modules.spreadsheetimport.components.exitDialogMessage'),
       buttons: [
-        { title: 'Cancel' },
-        { title: 'Exit', onClick: onClose, accent: 'danger', role: 'confirm' },
+        { title: t('modules.spreadsheetimport.components.cancel') },
+        {
+          title: t('modules.spreadsheetimport.components.exit'),
+          onClick: onClose,
+          accent: 'danger',
+          role: 'confirm',
+        },
       ],
     });
   };

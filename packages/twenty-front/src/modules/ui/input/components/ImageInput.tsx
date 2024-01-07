@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -103,6 +104,7 @@ export const ImageInput = ({
   disabled = false,
   className,
 }: ImageInputProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
   const onUploadButtonClick = () => {
@@ -144,7 +146,7 @@ export const ImageInput = ({
               Icon={IconX}
               onClick={onAbort}
               variant="secondary"
-              title="Abort"
+              title={t('ui.input.imageInput.abort')}
               disabled={!picture || disabled}
               fullWidth
             />
@@ -153,7 +155,7 @@ export const ImageInput = ({
               Icon={IconUpload}
               onClick={onUploadButtonClick}
               variant="secondary"
-              title="Upload"
+              title={t('ui.input.imageInput.upload')}
               disabled={disabled}
               fullWidth
             />
@@ -162,14 +164,12 @@ export const ImageInput = ({
             Icon={IconTrash}
             onClick={onRemove}
             variant="secondary"
-            title="Remove"
+            title={t('ui.input.imageInput.remove')}
             disabled={!picture || disabled}
             fullWidth
           />
         </StyledButtonContainer>
-        <StyledText>
-          We support your best PNGs, JPEGs and GIFs portraits under 10MB
-        </StyledText>
+        <StyledText>{t('ui.input.imageInput.supportedFiles')}</StyledText>
         {errorMessage && <StyledErrorText>{errorMessage}</StyledErrorText>}
       </StyledContent>
     </StyledContainer>

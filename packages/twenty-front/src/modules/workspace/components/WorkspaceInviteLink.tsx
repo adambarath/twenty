@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -24,6 +25,7 @@ type WorkspaceInviteLinkProps = {
 export const WorkspaceInviteLink = ({
   inviteLink,
 }: WorkspaceInviteLinkProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const { enqueueSnackBar } = useSnackBar();
@@ -37,9 +39,9 @@ export const WorkspaceInviteLink = ({
         Icon={IconLink}
         variant="primary"
         accent="blue"
-        title="Copy link"
+        title={t('workspace.workspaceInviteLink.copy')}
         onClick={() => {
-          enqueueSnackBar('Link copied to clipboard', {
+          enqueueSnackBar(t('workspace.workspaceInviteLink.copied'), {
             variant: 'success',
             icon: <IconCopy size={theme.icon.size.md} />,
             duration: 2000,

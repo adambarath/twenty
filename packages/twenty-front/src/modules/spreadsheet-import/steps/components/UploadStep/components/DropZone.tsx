@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import * as XLSX from 'xlsx-ugnis';
 
@@ -7,7 +8,6 @@ import { useSpreadsheetImportInternal } from '@/spreadsheet-import/hooks/useSpre
 import { readFileAsync } from '@/spreadsheet-import/utils/readFilesAsync';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { MainButton } from '@/ui/input/button/components/MainButton';
-
 const StyledContainer = styled.div`
   align-items: center;
   background: ${({ theme }) => `
@@ -92,7 +92,7 @@ type DropZoneProps = {
 
 export const DropZone = ({ onContinue, isLoading }: DropZoneProps) => {
   const { maxFileSize, dateFormat, parseRaw } = useSpreadsheetImportInternal();
-
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const { enqueueSnackBar } = useSnackBar();
@@ -149,7 +149,10 @@ export const DropZone = ({ onContinue, isLoading }: DropZoneProps) => {
       ) : (
         <>
           <StyledText>Upload .xlsx, .xls or .csv file</StyledText>
-          <StyledButton onClick={open} title="Select file" />
+          <StyledButton
+            onClick={open}
+            title={t('modules.spreadsheetimport.uploadStep.select')}
+          />
         </>
       )}
     </StyledContainer>

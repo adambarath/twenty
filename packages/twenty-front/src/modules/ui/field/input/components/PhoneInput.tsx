@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactPhoneNumberInput from 'react-phone-number-input';
 import styled from '@emotion/styled';
 
@@ -69,6 +70,7 @@ export const PhoneInput = ({
   hotkeyScope,
   onChange,
 }: PhoneInputProps) => {
+  const { t } = useTranslation();
   const [internalValue, setInternalValue] = useState<string | undefined>(value);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -97,7 +99,7 @@ export const PhoneInput = ({
     <StyledContainer ref={wrapperRef}>
       <StyledCustomPhoneInput
         autoFocus={autoFocus}
-        placeholder="Phone number"
+        placeholder={t('ui.input.phoneInput.placeholder')}
         value={value}
         onChange={handleChange}
         international={true}

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { ContinueButton } from '@/spreadsheet-import/components/ContinueButton';
@@ -112,6 +113,7 @@ export const MatchColumnsStep = <T extends string>({
   headerValues,
   onContinue,
 }: MatchColumnsStepProps<T>) => {
+  const { t } = useTranslation();
   const { enqueueDialog } = useDialogManager();
   const { enqueueSnackBar } = useSnackBar();
   const dataExample = data.slice(0, 2);
@@ -168,10 +170,15 @@ export const MatchColumnsStep = <T extends string>({
             if (columnIndex === index) {
               return setColumn(column, field, data);
             } else if (index === existingFieldIndex) {
-              enqueueSnackBar('Columns cannot duplicate', {
-                title: 'Another column unselected',
-                variant: 'error',
-              });
+              enqueueSnackBar(
+                t('modules.spreadsheetimport.matchColumnsStep.cannotduplicate'),
+                {
+                  title: t(
+                    'modules.spreadsheetimport.matchColumnsStep.columnunselected',
+                  ),
+                  variant: 'error',
+                },
+              );
               return setColumn(column);
             } else {
               return column;
@@ -180,7 +187,7 @@ export const MatchColumnsStep = <T extends string>({
         );
       }
     },
-    [columns, onRevertIgnore, onIgnore, fields, data, enqueueSnackBar],
+    [columns, onRevertIgnore, onIgnore, fields, data, enqueueSnackBar, t],
   );
 
   const onSubChange = useCallback(
@@ -209,9 +216,10 @@ export const MatchColumnsStep = <T extends string>({
   const handleOnContinue = useCallback(async () => {
     if (unmatchedRequiredFields.length > 0) {
       enqueueDialog({
-        title: 'Not all columns matched',
-        message:
-          'There are required columns that are not matched or ignored. Do you want to continue?',
+        title: t('modules.spreadsheetimport.matchColumnsStep.notallmatched'),
+        message: t(
+          'modules.spreadsheetimport.matchColumnsStep.notallmatchedMessage',
+        ),
         children: (
           <StyledColumnsContainer>
             <StyledColumns>Columns not matched:</StyledColumns>
@@ -221,9 +229,9 @@ export const MatchColumnsStep = <T extends string>({
           </StyledColumnsContainer>
         ),
         buttons: [
-          { title: 'Cancel' },
+          { title: t('modules.spreadsheetimport.matchColumnsStep.cancel') },
           {
-            title: 'Continue',
+            title: t('modules.spreadsheetimport.matchColumnsStep.continue'),
             onClick: handleAlertOnContinue,
             variant: 'primary',
             role: 'confirm',
@@ -247,6 +255,7 @@ export const MatchColumnsStep = <T extends string>({
     columns,
     data,
     fields,
+    t,
   ]);
 
   useEffect(() => {
@@ -260,8 +269,10 @@ export const MatchColumnsStep = <T extends string>({
     <>
       <StyledContent>
         <Heading
-          title="Match Columns"
-          description="Select the correct field for each column you'd like to import."
+          title={t('modules.spreadsheetimport.matchColumnsStep.matchcolumns')}
+          description={t(
+            'modules.spreadsheetimport.matchColumnsStep.matchcolumnsDescription',
+          )}
         />
         <ColumnGrid
           columns={columns}
@@ -286,7 +297,7 @@ export const MatchColumnsStep = <T extends string>({
       <ContinueButton
         isLoading={isLoading}
         onContinue={handleOnContinue}
-        title="Next"
+        title={t('modules.spreadsheetimport.matchColumnsStep.next')}
       />
     </>
   );

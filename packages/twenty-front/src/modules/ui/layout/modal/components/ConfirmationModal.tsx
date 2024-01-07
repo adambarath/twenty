@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
+import { t } from 'i18next';
 import debounce from 'lodash.debounce';
 
 import {
@@ -59,7 +60,7 @@ export const ConfirmationModal = ({
   subtitle,
   setIsOpen,
   onConfirmClick,
-  deleteButtonText = 'Delete',
+  deleteButtonText = t('ui.layout.modal.delete'),
   confirmationValue,
   confirmationPlaceholder,
 }: ConfirmationModalProps) => {

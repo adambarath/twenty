@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 
 import { ContinueButton } from '@/spreadsheet-import/components/ContinueButton';
@@ -33,6 +34,7 @@ export const SelectSheetStep = ({
   sheetNames,
   onContinue,
 }: SelectSheetStepProps) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   const [value, setValue] = useState(sheetNames[0]);
@@ -49,7 +51,9 @@ export const SelectSheetStep = ({
   return (
     <>
       <StyledContent>
-        <StyledHeading title="Select the sheet to use" />
+        <StyledHeading
+          title={t('modules.spreadsheetimport.selectSheetStep.select')}
+        />
         <StyledRadioContainer>
           <RadioGroup onValueChange={(value) => setValue(value)} value={value}>
             {sheetNames.map((sheetName) => (
@@ -61,7 +65,7 @@ export const SelectSheetStep = ({
       <ContinueButton
         isLoading={isLoading}
         onContinue={() => handleOnContinue(value)}
-        title="Next"
+        title={t('modules.spreadsheetimport.selectSheetStep.next')}
       />
     </>
   );

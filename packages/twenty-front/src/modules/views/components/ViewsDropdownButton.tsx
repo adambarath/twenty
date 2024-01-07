@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
@@ -66,6 +67,7 @@ export const ViewsDropdownButton = ({
   onViewEditModeChange,
   optionsDropdownScopeId,
 }: ViewsDropdownButtonProps) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const { removeView, changeViewInUrl } = useViewBar();
 
@@ -135,7 +137,9 @@ export const ViewsDropdownButton = ({
       clickableComponent={
         <StyledDropdownButtonContainer isUnfolded={isViewsDropdownOpen}>
           <StyledViewIcon size={theme.icon.size.md} />
-          <StyledViewName>{currentView?.name ?? 'All'}</StyledViewName>
+          <StyledViewName>
+            {currentView?.name ?? t('views.viewsDropdownButton.all')}
+          </StyledViewName>
           <StyledDropdownLabelAdornments>
             · {entityCountInCurrentView}{' '}
             <IconChevronDown size={theme.icon.size.sm} />
@@ -173,7 +177,7 @@ export const ViewsDropdownButton = ({
             <MenuItem
               onClick={handleAddViewButtonClick}
               LeftIcon={IconPlus}
-              text="Add view"
+              text={t('views.viewsDropdownButton.addviews')}
             />
           </StyledBoldDropdownMenuItemsContainer>
         </>

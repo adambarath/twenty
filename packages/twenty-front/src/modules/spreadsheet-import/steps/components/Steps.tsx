@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { t } from 'i18next';
 
 import { useSpreadsheetImportInitialStep } from '@/spreadsheet-import/hooks/useSpreadsheetImportInitialStep';
 import { useSpreadsheetImportInternal } from '@/spreadsheet-import/hooks/useSpreadsheetImportInternal';
@@ -23,9 +24,9 @@ const StyledHeader = styled(Modal.Header)`
 `;
 
 const stepTitles = {
-  uploadStep: 'Upload file',
-  matchColumnsStep: 'Match columns',
-  validationStep: 'Validate data',
+  uploadStep: t('modules.spreadsheetimport.steps.uploadStep'),
+  matchColumnsStep: t('modules.spreadsheetimport.steps.matchColumnsStep'),
+  validationStep: t('modules.spreadsheetimport.steps.validationStep'),
 } as const;
 
 export const Steps = () => {

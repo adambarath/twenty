@@ -1,4 +1,5 @@
 import { ReactNode, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSelectableListHotKeys } from '@/ui/layout/selectable-list/hooks/internal/useSelectableListHotKeys';
 import { useSelectableList } from '@/ui/layout/selectable-list/hooks/useSelectableList';
@@ -23,6 +24,7 @@ export const SelectableList = ({
   selectableItemIdMatrix,
   onEnter,
 }: SelectableListProps) => {
+  const { t } = useTranslation();
   useSelectableListHotKeys(selectableListId, hotkeyScope);
 
   const { setSelectableItemIds, setSelectableListOnEnter } =
@@ -34,9 +36,7 @@ export const SelectableList = ({
 
   useEffect(() => {
     if (!selectableItemIdArray && !selectableItemIdMatrix) {
-      throw new Error(
-        'Either selectableItemIdArray or selectableItemIdsMatrix must be provided',
-      );
+      throw new Error(t('ui.layout.selectableList.error'));
     }
 
     if (selectableItemIdMatrix) {
@@ -46,7 +46,7 @@ export const SelectableList = ({
     if (selectableItemIdArray) {
       setSelectableItemIds(arrayToChunks(selectableItemIdArray, 1));
     }
-  }, [selectableItemIdArray, selectableItemIdMatrix, setSelectableItemIds]);
+  }, [selectableItemIdArray, selectableItemIdMatrix, setSelectableItemIds, t]);
 
   return (
     <SelectableListScope selectableListScopeId={selectableListId}>
